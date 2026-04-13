@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleFavorite, deleteProduct } from '../redux/productSlice';
 import EditGame from './EditGame';
 
-function GameCard({ el }) {
+function GameCard({  el, ping, setping }) {
   const dispatch  = useDispatch();
   const favorites = useSelector(state => state.product.favorites);
   const isFav     = favorites.includes(el._id);
@@ -15,7 +15,11 @@ function GameCard({ el }) {
 
   const handleOpen   = () => { setActiveTab('info'); setShow(true);  };
   const handleClose  = () => { setActiveTab('info'); setShow(false); };
-  const handleRemove = () => { dispatch(deleteProduct(el._id)); handleClose(); };
+  const handleRemove = () => {
+    dispatch(deleteProduct(el._id));
+    setping(!ping); 
+    handleClose();
+  };
   const handleFav    = (e) => { e.stopPropagation(); dispatch(toggleFavorite(el._id)); };
 
 
@@ -311,7 +315,7 @@ function GameCard({ el }) {
                       {isFav ? '❤ Favorited' : '♡ Add to Favorites'}
                     </button>
 
-                    <EditGame el={el} onClose={handleClose} />
+                      <EditGame el={el} onClose={handleClose} ping={ping} setping={setping} />
 
                     <button
                       onClick={handleRemove}

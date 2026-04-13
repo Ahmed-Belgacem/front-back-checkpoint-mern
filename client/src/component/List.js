@@ -1,7 +1,7 @@
 import React from 'react';
 import GameCard from './GameCard';
 
-function List({ movies, text, rate }) {
+function List({ movies, text, rate, ping, setping }) {
 
   const displayed =
     rate === 1
@@ -32,7 +32,7 @@ function List({ movies, text, rate }) {
       <div className="parent">
         {displayed.length > 0 ? (
           displayed.map(el => (
-            <GameCard key={el._id} el={el} />
+            <GameCard key={el._id} el={el} ping={ping} setping={setping} />
           ))
         ) : (
           <div className="games-empty">

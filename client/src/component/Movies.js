@@ -1,7 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import List from './List';
 import Addmovies from './Addmovies';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { getProducts } from '../redux/productSlice';
 
 function Movies({ text, rate }) {
   const games       = useSelector(state => state.product.productlist);
@@ -9,7 +12,12 @@ function Movies({ text, rate }) {
   const trending    = actionGames.filter(g => g.trending);
   const soulsLike   = actionGames.filter(g => g.genre.includes('Souls-like'));
   const openWorld   = actionGames.filter(g => g.genre.includes('Open World'));
+  const dispatch = useDispatch();
+  const [ping, setping] = useState(false); // 👈 add
 
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [ping]); 
   return (
     <div>
 
@@ -35,7 +43,7 @@ function Movies({ text, rate }) {
             <span className="pill__label">Trending</span>
           </div>
           <div style={{ marginLeft: 'auto' }}>
-            <Addmovies />
+            <Addmovies ping={ping} setping={setping} />
           </div>
         </div>
       </div>
@@ -50,7 +58,7 @@ function Movies({ text, rate }) {
               <span className="section-header__title">RIGHT NOW</span>
             </div>
           </div>
-          <div className="leftlist"><List movies={trending} text={text} rate={rate} /></div>
+          <div className="leftlist"><List movies={trending} text={text} rate={rate} ping={ping} setping={setping}/></div>
         </>
       )}
 

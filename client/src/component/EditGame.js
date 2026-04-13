@@ -40,7 +40,7 @@ const typeColors = {
   indie:   '#06b6d4',
 };
 
-function EditGame({ el, onClose }) {
+function EditGame({ el, onClose, ping, setping }) {
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -59,11 +59,12 @@ function EditGame({ el, onClose }) {
   const handleOpen  = (e) => { e.stopPropagation(); setShow(true);  };
   const handleClose = ()  => setShow(false);
 
-  const handleSave = () => {
-    dispatch(editProduct({ id: el._id, data: edited }));
+const handleSave = () => {
+    dispatch(editProduct({ id: el._id, edited: edited })); 
+    setping(!ping);
     handleClose();
-    if (onClose) onClose(); 
-  };
+    if (onClose) onClose();
+};
 
   return (
     <>

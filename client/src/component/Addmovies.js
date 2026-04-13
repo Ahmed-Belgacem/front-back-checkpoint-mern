@@ -32,7 +32,7 @@ const S = {
   },
 };
 
-function Addmovies() {
+function Addmovies({ ping, setping }) {
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -48,11 +48,11 @@ function Addmovies() {
   const handleAdd = () => {
     if (newGame.title) {
       dispatch(addProduct(newGame));
-      setNewGame({
-        title: '', description: '', posterUrl: '',
+      setNewGame({ title: '', description: '', posterUrl: '',
         trailerUrl: '', rating: '', genre: [],
         type: 'action', platform: 'Multi', trending: false,
       });
+      setping(!ping); 
     }
   };
 

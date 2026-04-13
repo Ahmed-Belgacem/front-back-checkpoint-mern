@@ -1,7 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import List from './List';
 import Addmovies from './Addmovies';
+import { useState } from 'react';
+import { getProducts } from '../redux/productSlice';
+import { useEffect } from 'react';
 
 function Anime({ text, rate }) {
   const games        = useSelector(state => state.product.productlist);
@@ -10,7 +13,12 @@ function Anime({ text, rate }) {
   const battleRoyale = shooterGames.filter(g => g.genre.includes('Battle Royale'));
   const indieGames   = games.filter(g => g.type === 'indie');
   const sportsGames  = games.filter(g => g.type === 'sports');
+   const dispatch = useDispatch();
+  const [ping, setping] = useState(false); 
 
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [ping]); 
   return (
     <div>
 
@@ -39,7 +47,7 @@ function Anime({ text, rate }) {
             <span className="pill__label">Indie</span>
           </div>
           <div style={{ marginLeft: 'auto' }}>
-            <Addmovies />
+            <Addmovies setping={setping} />
           </div>
         </div>
       </div>
@@ -54,7 +62,7 @@ function Anime({ text, rate }) {
               <span className="section-header__title">SHOOTERS</span>
             </div>
           </div>
-          <div className="leftlist"><List movies={trending} text={text} rate={rate} /></div>
+          <div className="leftlist"><List movies={trending} text={text} rate={rate} setping={setping} /></div>
         </>
       )}
 

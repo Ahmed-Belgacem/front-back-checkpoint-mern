@@ -1,7 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import List from './List';
 import Addmovies from './Addmovies';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { getProducts } from '../redux/productSlice';
 
 function TV({ text, rate }) {
   const games     = useSelector(state => state.product.productlist);
@@ -9,7 +12,12 @@ function TV({ text, rate }) {
   const trending  = rpgGames.filter(g => g.trending);
   const openWorld = rpgGames.filter(g => g.genre.includes('Open World'));
   const turnBased = rpgGames.filter(g => g.genre.includes('Turn-Based') || g.genre.includes('JRPG'));
+  const dispatch = useDispatch();
+  const [ping, setping] = useState(false); // 👈 add
 
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [ping]); // 👈 add
   return (
     <div>
 
@@ -39,7 +47,7 @@ function TV({ text, rate }) {
             <span className="pill__label">Open World</span>
           </div>
           <div style={{ marginLeft: 'auto' }}>
-            <Addmovies />
+            <Addmovies setping={setping} />
           </div>
         </div>
       </div>
@@ -54,7 +62,7 @@ function TV({ text, rate }) {
               <span className="section-header__title">RPG</span>
             </div>
           </div>
-          <div className="leftlist"><List movies={trending} text={text} rate={rate} /></div>
+          <div className="leftlist"><List movies={trending} text={text} rate={rate} setping={setping} /></div>
         </>
       )}
 

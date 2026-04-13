@@ -21,6 +21,8 @@ function FavoritesSection({ text, rate }) {
   const games = useSelector(state => state.product.productlist);
   const favorites = useSelector(state => state.product.favorites);
   const favGames = games.filter(g => favorites.includes(g._id));
+
+  
   if (favGames.length === 0) return null;
   return (
     <>
@@ -44,9 +46,11 @@ function Home({ text, rate }) {
   const games = useSelector(state => state.product.productlist); 
   const favorites = useSelector(state => state.product.favorites);
 
-    useEffect(() => {
-    dispatch(getProducts()); 
-  }, [dispatch]);
+  const [ping, setping] = useState(false); 
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [ping]);
   
 
   return (
@@ -62,11 +66,11 @@ function Home({ text, rate }) {
           </div>
         </div>
         <div className="section-actions">
-          <Addmovies />
+          <Addmovies  ping={ping} setping={setping} />
         </div>
       </div>
-      <div className="leftlist">
-        <List movies={games.filter(m => m.trending)} text={text} rate={rate} />
+   <div className="leftlist">
+        <List movies={games.filter(m => m.trending)} text={text} rate={rate} ping={ping} setping={setping} />
       </div>
 
       <div className="section-header">
