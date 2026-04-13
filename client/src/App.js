@@ -44,13 +44,13 @@ function FavoritesSection({ text, rate }) {
 function Home({ text, rate }) {
   const dispatch = useDispatch();
   const games = useSelector(state => state.product.productlist); 
-  const favorites = useSelector(state => state.product.favorites);
+ 
 
   const [ping, setping] = useState(false); 
 
-  useEffect(() => {
+useEffect(() => {
     dispatch(getProducts());
-  }, [ping]);
+}, [ping, dispatch]); 
   
 
   return (

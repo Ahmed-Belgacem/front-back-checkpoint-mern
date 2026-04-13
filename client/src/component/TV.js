@@ -13,11 +13,11 @@ function TV({ text, rate }) {
   const openWorld = rpgGames.filter(g => g.genre.includes('Open World'));
   const turnBased = rpgGames.filter(g => g.genre.includes('Turn-Based') || g.genre.includes('JRPG'));
   const dispatch = useDispatch();
-  const [ping, setping] = useState(false); // 👈 add
+  const [ping, setping] = useState(false); 
 
-  useEffect(() => {
+useEffect(() => {
     dispatch(getProducts());
-  }, [ping]); // 👈 add
+}, [ping, dispatch]); 
   return (
     <div>
 
