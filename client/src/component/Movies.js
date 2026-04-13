@@ -14,9 +14,12 @@ function Movies({ text, rate }) {
   const dispatch    = useDispatch();
   const [ping, setping] = useState(false);
 
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [ping, dispatch]);
+useEffect(() => {
+    const timer = setTimeout(() => {
+        dispatch(getProducts());
+    }, 1500); 
+    return () => clearTimeout(timer);
+}, [ping, dispatch]);
 
   return (
     <div>
