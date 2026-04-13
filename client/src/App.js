@@ -49,7 +49,7 @@ function Home({ text, rate }) {
 useEffect(() => {
     const timer = setTimeout(() => {
         dispatch(getProducts());
-    }, 1500); 
+    }, 200); 
     return () => clearTimeout(timer);
 }, [ping, dispatch]);
 
