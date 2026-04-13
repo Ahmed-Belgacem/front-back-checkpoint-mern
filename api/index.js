@@ -17,7 +17,9 @@ connectDB();
 
 
 
-app.use(cors());
+app.use(cors({
+  origin: "https://front-back-checkpoint-mern.vercel.app"
+}));
 app.use("/user", require("./routes/user"));
 app.use("/product", require("./routes/product"));
 app.get("/", (req, res) => res.send("Express on Vercel"));
