@@ -10,7 +10,7 @@ function Todolist() {
   return (
     <div className='todo-list'>
         <Addtodo />
-        <button className='add-task' onClick={() => setshowdone(!showdone)}>    {showdone ? "show done" : "show undone"}</button>
+        <button className='add-task' onClick={() => setshowdone(!showdone)}>    {showdone ? "show undone" : "show done"}</button>
       {todos.filter((todo) =>  todo.isDone===showdone).map((todo) => (<Todoitem  todo={todo} />))}
     </div>
   )

@@ -12,7 +12,7 @@ const Todoitem = ({ todo }) => {
         <p>{todo.description}</p>
       </div>
       <span onClick={() => dispatch(doneTask({ id: todo.id }))}>
-         {todo.isDone ? "undone" : "done"}
+         {todo.isDone ? "done" : "undone"}
       </span>
       <Edittask todo={todo} />
       <button onClick={() => dispatch(removeTask({ id: todo.id }))}>Remove</button>
