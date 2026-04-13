@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getProducts = createAsyncThunk("product/get", async () => {
     try {
-        let result = await axios.get("https://front-back-checkpoint-mern.vercel.app/product"); 
+        let result = await axios.get("https://backend-gamestore.vercel.app/product"); 
         return result
     } catch (error) {
         console.log(error)
@@ -12,7 +12,7 @@ export const getProducts = createAsyncThunk("product/get", async () => {
 
 export const addProduct = createAsyncThunk("product/add", async (newProduct) => {
     try {
-        let result = await axios.post("https://front-back-checkpoint-mern.vercel.app/product/add", newProduct); // 👈
+        let result = await axios.post("https://backend-gamestore.vercel.app/product/add", newProduct);
         return result
     } catch (error) {
         console.log(error)
@@ -21,7 +21,7 @@ export const addProduct = createAsyncThunk("product/add", async (newProduct) => 
 
 export const deleteProduct = createAsyncThunk("product/delete", async (id) => {
     try {
-        let result = await axios.delete(`https://front-back-checkpoint-mern.vercel.app/product/${id}`); // 👈
+        let result = await axios.delete(`https://backend-gamestore.vercel.app/product/${id}`);
         return result
     } catch (error) {
         console.log(error)
@@ -30,7 +30,7 @@ export const deleteProduct = createAsyncThunk("product/delete", async (id) => {
 
 export const editProduct = createAsyncThunk("product/edit", async ({ id, edited }) => {
     try {
-        let result = await axios.put(`https://front-back-checkpoint-mern.vercel.app/product/${id}`, edited); // 👈
+        let result = await axios.put(`https://backend-gamestore.vercel.app/product/${id}`, edited);
         return result
     } catch (error) {
         console.log(error)
