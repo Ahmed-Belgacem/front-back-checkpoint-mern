@@ -18,7 +18,7 @@ connectDB();
 
 
 app.use(cors({
-  origin: "https://front-back-checkpoint-mern.vercel.app"
+  origin: "https://gamestore-website.vercel.app"
 }));
 app.use("/user", require("./routes/user"));
 app.use("/product", require("./routes/product"));
