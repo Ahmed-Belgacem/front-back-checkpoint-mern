@@ -2,9 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import List from './List';
 import Addmovies from './Addmovies';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getProducts } from '../redux/productSlice';
-import { useEffect } from 'react';
 
 function Anime({ text, rate }) {
   const games        = useSelector(state => state.product.productlist);
@@ -13,15 +12,15 @@ function Anime({ text, rate }) {
   const battleRoyale = shooterGames.filter(g => g.genre.includes('Battle Royale'));
   const indieGames   = games.filter(g => g.type === 'indie');
   const sportsGames  = games.filter(g => g.type === 'sports');
-   const dispatch = useDispatch();
-  const [ping, setping] = useState(false); 
+  const dispatch     = useDispatch();
+  const [ping, setping] = useState(false);
 
-useEffect(() => {
+  useEffect(() => {
     dispatch(getProducts());
-}, [ping, dispatch]); 
+  }, [ping, dispatch]);
+
   return (
     <div>
-
       <div className="page-hero">
         <div className="page-hero__accent" style={{ color: '#f59e0b' }}>SHOOTER</div>
         <div className="page-hero__eyebrow">Game Category</div>
@@ -47,12 +46,11 @@ useEffect(() => {
             <span className="pill__label">Indie</span>
           </div>
           <div style={{ marginLeft: 'auto' }}>
-            <Addmovies setping={setping} />
+            <Addmovies ping={ping} setping={setping} />
           </div>
         </div>
       </div>
 
-   
       {trending.length > 0 && (
         <>
           <div className="section-header">
@@ -62,11 +60,10 @@ useEffect(() => {
               <span className="section-header__title">SHOOTERS</span>
             </div>
           </div>
-          <div className="leftlist"><List movies={trending} text={text} rate={rate} setping={setping} /></div>
+          <div className="leftlist"><List movies={trending} text={text} rate={rate} ping={ping} setping={setping} /></div>
         </>
       )}
 
- 
       <div className="section-header">
         <div className="section-header__bar" />
         <div className="section-header__text">
@@ -74,9 +71,8 @@ useEffect(() => {
           <span className="section-header__title">SHOOTERS</span>
         </div>
       </div>
-      <div className="leftlist"><List movies={shooterGames} text={text} rate={rate} /></div>
+      <div className="leftlist"><List movies={shooterGames} text={text} rate={rate} ping={ping} setping={setping} /></div>
 
-  
       {battleRoyale.length > 0 && (
         <>
           <div className="section-header">
@@ -86,10 +82,9 @@ useEffect(() => {
               <span className="section-header__title">ROYALE</span>
             </div>
           </div>
-          <div className="leftlist"><List movies={battleRoyale} text={text} rate={rate} /></div>
+          <div className="leftlist"><List movies={battleRoyale} text={text} rate={rate} ping={ping} setping={setping} /></div>
         </>
       )}
-
 
       <div className="section-header">
         <div className="section-header__bar" />
@@ -98,9 +93,8 @@ useEffect(() => {
           <span className="section-header__title">RACING</span>
         </div>
       </div>
-      <div className="leftlist"><List movies={sportsGames} text={text} rate={rate} /></div>
+      <div className="leftlist"><List movies={sportsGames} text={text} rate={rate} ping={ping} setping={setping} /></div>
 
-     
       <div className="section-header">
         <div className="section-header__bar" />
         <div className="section-header__text">
@@ -108,7 +102,7 @@ useEffect(() => {
           <span className="section-header__title">GEMS</span>
         </div>
       </div>
-      <div className="leftlist"><List movies={indieGames} text={text} rate={rate} /></div>
+      <div className="leftlist"><List movies={indieGames} text={text} rate={rate} ping={ping} setping={setping} /></div>
 
       <br /><br />
     </div>

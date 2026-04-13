@@ -2,8 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import List from './List';
 import Addmovies from './Addmovies';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getProducts } from '../redux/productSlice';
 
 function TV({ text, rate }) {
@@ -12,16 +11,15 @@ function TV({ text, rate }) {
   const trending  = rpgGames.filter(g => g.trending);
   const openWorld = rpgGames.filter(g => g.genre.includes('Open World'));
   const turnBased = rpgGames.filter(g => g.genre.includes('Turn-Based') || g.genre.includes('JRPG'));
-  const dispatch = useDispatch();
-  const [ping, setping] = useState(false); 
+  const dispatch  = useDispatch();
+  const [ping, setping] = useState(false);
 
-useEffect(() => {
+  useEffect(() => {
     dispatch(getProducts());
-}, [ping, dispatch]); 
+  }, [ping, dispatch]);
+
   return (
     <div>
-
-  
       <div className="page-hero">
         <div className="page-hero__accent" style={{ color: '#8b5cf6' }}>RPG</div>
         <div className="page-hero__eyebrow">Game Category</div>
@@ -47,12 +45,11 @@ useEffect(() => {
             <span className="pill__label">Open World</span>
           </div>
           <div style={{ marginLeft: 'auto' }}>
-            <Addmovies setping={setping} />
+            <Addmovies ping={ping} setping={setping} />
           </div>
         </div>
       </div>
 
-   
       {trending.length > 0 && (
         <>
           <div className="section-header">
@@ -62,11 +59,10 @@ useEffect(() => {
               <span className="section-header__title">RPG</span>
             </div>
           </div>
-          <div className="leftlist"><List movies={trending} text={text} rate={rate} setping={setping} /></div>
+          <div className="leftlist"><List movies={trending} text={text} rate={rate} ping={ping} setping={setping} /></div>
         </>
       )}
 
-   
       <div className="section-header">
         <div className="section-header__bar" />
         <div className="section-header__text">
@@ -74,9 +70,8 @@ useEffect(() => {
           <span className="section-header__title">RPG WORLDS</span>
         </div>
       </div>
-      <div className="leftlist"><List movies={rpgGames} text={text} rate={rate} /></div>
+      <div className="leftlist"><List movies={rpgGames} text={text} rate={rate} ping={ping} setping={setping} /></div>
 
-  
       {openWorld.length > 0 && (
         <>
           <div className="section-header">
@@ -86,10 +81,9 @@ useEffect(() => {
               <span className="section-header__title">WORLD RPG</span>
             </div>
           </div>
-          <div className="leftlist"><List movies={openWorld} text={text} rate={rate} /></div>
+          <div className="leftlist"><List movies={openWorld} text={text} rate={rate} ping={ping} setping={setping} /></div>
         </>
       )}
-
 
       {turnBased.length > 0 && (
         <>
@@ -100,7 +94,7 @@ useEffect(() => {
               <span className="section-header__title">& JRPG</span>
             </div>
           </div>
-          <div className="leftlist"><List movies={turnBased} text={text} rate={rate} /></div>
+          <div className="leftlist"><List movies={turnBased} text={text} rate={rate} ping={ping} setping={setping} /></div>
         </>
       )}
 
