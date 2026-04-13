@@ -6,7 +6,7 @@ import "./admin.css";
 const Todoitem = ({ todo }) => {
     const dispatch = useDispatch();
   return (
-    <div className={`todo-item ${todo.isDone ? "done" : "undone"}`}>
+    <div className={`todo-item ${todo.isDone ? "undone" : "done"}`}>
       <div className='text'>
         <h2>{todo.title}</h2>
         <p>{todo.description}</p>
