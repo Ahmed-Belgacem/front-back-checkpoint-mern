@@ -17,12 +17,11 @@ import Movies    from './component/Movies';
 import Admin     from './component/Admin';
 
 
-function FavoritesSection({ text, rate }) {
-  const games = useSelector(state => state.product.productlist);
+function FavoritesSection({ text, rate, ping, setping }) {
+  const games     = useSelector(state => state.product.productlist);
   const favorites = useSelector(state => state.product.favorites);
-  const favGames = games.filter(g => favorites.includes(g._id));
+  const favGames  = games.filter(g => favorites.includes(g._id));
 
-  
   if (favGames.length === 0) return null;
   return (
     <>
@@ -34,7 +33,7 @@ function FavoritesSection({ text, rate }) {
         </div>
       </div>
       <div className="leftlist">
-        <List movies={favGames} text={text} rate={rate} />
+        <List movies={favGames} text={text} rate={rate} ping={ping} setping={setping} />
       </div>
     </>
   );
@@ -43,15 +42,13 @@ function FavoritesSection({ text, rate }) {
 
 function Home({ text, rate }) {
   const dispatch = useDispatch();
-  const games = useSelector(state => state.product.productlist); 
- 
+  const games    = useSelector(state => state.product.productlist);
 
-  const [ping, setping] = useState(false); 
+  const [ping, setping] = useState(false);
 
-useEffect(() => {
+  useEffect(() => {
     dispatch(getProducts());
-}, [ping, dispatch]); 
-  
+  }, [ping, dispatch]);
 
   return (
     <>
@@ -66,10 +63,10 @@ useEffect(() => {
           </div>
         </div>
         <div className="section-actions">
-          <Addmovies  ping={ping} setping={setping} />
+          <Addmovies ping={ping} setping={setping} />
         </div>
       </div>
-   <div className="leftlist">
+      <div className="leftlist">
         <List movies={games.filter(m => m.trending)} text={text} rate={rate} ping={ping} setping={setping} />
       </div>
 
@@ -81,7 +78,7 @@ useEffect(() => {
         </div>
       </div>
       <div className="leftlist">
-        <List movies={games.filter(m => m.rating === 5)} text={text} rate={rate} />
+        <List movies={games.filter(m => m.rating === 5)} text={text} rate={rate} ping={ping} setping={setping} />
       </div>
 
       <div className="section-header">
@@ -92,7 +89,7 @@ useEffect(() => {
         </div>
       </div>
       <div className="leftlist">
-        <List movies={games.filter(m => m.genre.includes('Open World'))} text={text} rate={rate} />
+        <List movies={games.filter(m => m.genre.includes('Open World'))} text={text} rate={rate} ping={ping} setping={setping} />
       </div>
 
       <div className="section-header">
@@ -103,7 +100,7 @@ useEffect(() => {
         </div>
       </div>
       <div className="leftlist">
-        <List movies={games.filter(m => m.genre.includes('Souls-like'))} text={text} rate={rate} />
+        <List movies={games.filter(m => m.genre.includes('Souls-like'))} text={text} rate={rate} ping={ping} setping={setping} />
       </div>
 
       <div className="section-header">
@@ -114,10 +111,10 @@ useEffect(() => {
         </div>
       </div>
       <div className="leftlist">
-        <List movies={games.filter(m => m.genre.includes('Horror'))} text={text} rate={rate} />
+        <List movies={games.filter(m => m.genre.includes('Horror'))} text={text} rate={rate} ping={ping} setping={setping} />
       </div>
 
-      <FavoritesSection text={text} rate={rate} />
+      <FavoritesSection text={text} rate={rate} ping={ping} setping={setping} />
     </>
   );
 }
@@ -137,7 +134,6 @@ function App() {
         <Route path="/anime"  element={<Anime  text={text} rate={rate} />} />
         <Route path="/admin"  element={<Admin  text={text} rate={rate} />} />
       </Routes>
-     
       <Footer />
     </div>
   );
