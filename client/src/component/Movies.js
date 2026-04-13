@@ -15,9 +15,9 @@ function Movies({ text, rate }) {
   const dispatch = useDispatch();
   const [ping, setping] = useState(false); // 👈 add
 
-  useEffect(() => {
+useEffect(() => {
     dispatch(getProducts());
-  }, [ping]); 
+}, [ping, dispatch]);
   return (
     <div>
 

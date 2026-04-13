@@ -16,9 +16,9 @@ function Anime({ text, rate }) {
    const dispatch = useDispatch();
   const [ping, setping] = useState(false); 
 
-  useEffect(() => {
+useEffect(() => {
     dispatch(getProducts());
-  }, [ping]); 
+}, [ping, dispatch]); 
   return (
     <div>
 

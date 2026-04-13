@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,7 +15,7 @@ import TV        from './component/TV';
 import Anime     from './component/Anime';
 import Movies    from './component/Movies';
 import Admin     from './component/Admin';
-import Todolist  from './component/Todolist';
+
 
 function FavoritesSection({ text, rate }) {
   const games = useSelector(state => state.product.productlist);
